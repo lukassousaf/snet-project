@@ -10,18 +10,6 @@
 
 ## Instalação:
 
-<h3 align="justify">Instalar django</h3>
-
-```bash
-$ pip install django
-```
-
-<h3 align="justify">Instalar as dependências</h3>
-
-```bash
-$ pip install -r requirements.txt
-```
-
 <h3 align="justify">Criar um ambiente virtual</h3>
 
 ```bash
@@ -32,6 +20,18 @@ $ python -m venv venv
 
 ```bash
 $ .\venv\Scripts\Activate
+```
+
+<h3 align="justify">Instalar django</h3>
+
+```bash
+$ pip install django
+```
+
+<h3 align="justify">Instalar as dependências</h3>
+
+```bash
+$ pip install -r requirements.txt
 ```
 
 ## Banco de Dados
