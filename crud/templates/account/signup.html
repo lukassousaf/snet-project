@@ -1,0 +1,64 @@
+{% extends 'base.html' %} 
+
+{% load crispy_forms_tags %} 
+
+{% block title %}Cadastro{% endblock title%}
+{% block content %}
+
+
+
+<form  method="POST">
+  <p class="center">Cadastro</p>
+  {% csrf_token %} {{ form|crispy }}
+  <button class="button center" type="submit">Cadastrar</button>
+</form>
+
+<style>
+  p {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  label div, input {
+      width: 100%;
+      padding: 12px 20px !important;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+  
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .button {
+      width: 100%;
+      background-color: #074583;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .button:hover {
+      background-color: #033e7c;
+    }
+    body {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+    }
+    form {
+      padding: 20px;
+      margin-top: 70px;
+    }
+    
+  </style>
+{% endblock %}

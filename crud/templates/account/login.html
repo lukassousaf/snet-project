@@ -1,0 +1,62 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+{% load socialaccount %}
+{% providers_media_js %}
+<form method="POST"  >
+  <p>Entrar</p>
+  {% csrf_token %}
+   {{ form|crispy }}
+   <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
+  <button class="button center" type="submit">Entrar</button>
+</form>
+
+<style>
+  p {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  label div,
+  input {
+    width: 100%;
+    padding: 12px 20px !important;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button {
+    width: 100%;
+    background-color: #074583;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  .button:hover {
+    background-color: #033e7c;
+  }
+  body {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+  }
+
+  form {
+    padding: 20px;
+    margin-top: 70px;
+  }
+</style>
+{% endblock %}

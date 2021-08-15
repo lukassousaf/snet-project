@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+ 
+
+{% block content %}
+
+<table class="table table-bordered">
+  <p class="center">Listagem de clientes</p>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>CEP</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for client in lista %}
+    <tr>
+      <td>{{client.nome}}</td>
+      <td>{{client.telefone}}</td>
+      <td>{{client.cep}}</td>
+      <td>
+        <a href="{% url 'client:client_edit' pk=client.pk %}">
+          <span class="fas fa-pen blue"></span>
+        </a>
+        <a href="{% url 'client:client_remove' pk=client.pk %}">
+          <span class="fas fa-trash blue"></span>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a class="center" href="{% url 'client:client_new' %}">
+  <button class="button" type="submit">Cadastrar</button>
+</a>
+
+<style>
+
+  p, table {
+    margin-top: 50px;
+  }  
+
+  tr th {
+    margin-left: 10px !important;
+  }
+  td {
+    padding: 25px !important;
+  }
+  .blue {
+    color: #074583;
+    font-size: 20px;
+  }
+
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button {
+    width: 98%;
+    background-color: #074583;
+    color: white;
+    padding: 18px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  .button:hover {
+    background-color: #033e7c;
+  }
+  p {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+
+
+{% endblock content%}

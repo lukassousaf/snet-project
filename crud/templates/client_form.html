@@ -1,0 +1,138 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar cliente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+      <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+</head>
+    <!-- Adicionando JQuery -->
+<script>
+  $(document).ready(function() {
+    function limpa_formulário_cep() {
+      // Limpa valores do formulário de cep.
+      $("#rua").val("");
+      $("#bairro").val("");
+      $("#cidade").val("");
+      $("#uf").val("");
+      $("#ibge").val("");
+    }
+     //Quando o campo cep perde o foco.
+    $("#id_cep").blur(function() {
+      //Nova variável "cep" somente com dígitos.
+      var cep = $(this).val().replace(/\D/g, '');
+      //Verifica se campo cep possui valor informado.
+      if (cep != "") {
+        //Expressão regular para validar o CEP.
+        var validacep = /^[0-9]{8}$/;
+        //Valida o formato do CEP.
+        if(validacep.test(cep)) {
+          //Preenche os campos com "..." enquanto consulta webservice.
+          $("#id_rua").val("...");
+          $("#id_bairro").val("...");
+          $("#id_cidade").val("...");
+          $("#id_estado").val("...");
+            //Consulta o webservice viacep.com.br/
+            $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+              if (!("erro" in dados)) {
+                //Atualiza os campos com os valores da consulta.
+                $("#id_rua").val(dados.logradouro);
+                $("#id_bairro").val(dados.bairro);
+                $("#id_cidade").val(dados.localidade);
+                $("#id_estado").val(dados.uf);   
+              } //end if.
+              else {
+                //CEP pesquisado não foi encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+              }
+            });
+        } //end if.
+        else {
+          //cep é inválido.
+          limpa_formulário_cep();
+          alert("Formato de CEP inválido.");
+        }
+      } //end if.
+      else {
+        //cep sem valor, limpa formulário.
+        limpa_formulário_cep();
+      }
+    });
+  });
+</script>
+{% block content %}   
+<p>Cadastro de Clientes</p>
+<form method="POST">
+{% csrf_token %}
+{% bootstrap_form form %}
+<button type="submit" class="center">Salvar</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    
+    $("#id_cep").mask("00000-000");
+    $('#id_telefone').mask('(00) 00000-0000');
+  })
+</script>
+<style>
+  * {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  p {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input, select, button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button {
+    
+    background-color: #074583;
+    color: white;
+    padding: 18px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  button:hover {
+    background-color: #033e7c;
+  }
+  
+  body {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  </style>    
+{% endblock content %}
