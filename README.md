@@ -40,6 +40,22 @@ $ .\venv\Scripts\Activate
 
 **`settings.py`** </h3>
 
+<h3 align="justify">Alterar o "NAME", "USER" e "PASSWORD" </h3>
+
+```
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "bancodedados",
+        "USER": "postgres",
+        "PASSWORD": "root",
+        "HOST": "localhost",
+        "PORT": 5432,
+    }
+}
+```
+
 ## Iniciar
 
 ```bash
