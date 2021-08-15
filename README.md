@@ -10,6 +10,12 @@
 
 ## Instalação:
 
+<h3 align="justify">Instalar django</h3>
+
+```bash
+$ pip install django
+```
+
 <h3 align="justify">Instalar as dependências</h3>
 
 ```bash
@@ -27,6 +33,12 @@ $ python -m venv venv
 ```bash
 $ .\venv\Scripts\Activate
 ```
+
+## Banco de Dados
+
+<h3 align="justify">Criar um banco de dados postgresql e configurar em DATABASES no arquivo
+
+**`settings.py`** </h3>
 
 ## Iniciar
 
